@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/Goltstein/.android/build-cache/f36268f6722573303ba8afc5531f6e65113ec452/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="62e36121744f376671b1665e8ef899c25f75eeb4">
+        <dex dex="/Users/Goltstein/AndroidStudioProjects/InkBookSDK/InkbookSDK/app/build/intermediates/pre-dexed/debug/classes_34924f0e262018d5482181eba564e16628628b29.jar" />
+    </item>
+
+</items>
