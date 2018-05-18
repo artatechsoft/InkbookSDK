@@ -180,12 +180,19 @@ widget.dismiss();
 
 
 #### InkBookSDK usages
+  - **InkBookSDK.isEInk(_Activity_)** ---> true if current device use E-Ink display
   - **InkBookSDK.isInkBook()** ---> true if device is InkBook (_InkBook Prime or InkBook Classic2_)
   - **InkBookSDK.isFullSupported()** ---> device can switch between PART and RAPID mode (_InkBook Prime_)
   - **InkBookSDK.isRefreshSupport()** ---> device can only refresh screen (_InkBook Classic2_)
-  - **InkBookSDK.setRAPIDMode(_context_)** ---> switch display to RAPID mode
-  - **InkBookSDK.setPARTMode(_context_)** ---> switch display to PART mode
-  - **InkBookSDK.refreshScreen(_context_)** ---> refresh device screen
+  - **InkBookSDK.isChromiumUsed(_Activity_)** ---> return true if current WebView provider is Chromium
+  - **InkBookSDK.getChromiumVersion(_Activity_)** ---> return version of Chromium used in system or "WebViewClassic" for old webview
+  - **InkBookSDK.getCurrentRefreshMode()** ---> return name of current refresh mode (RAPID,PART,A2)
+  - **InkBookSDK.setRAPIDMode(_Activity_)** ---> switch display to RAPID mode
+  - **InkBookSDK.setPARTMode(_Activity_)** ---> switch display to PART mode
+  - **InkBookSDK.setA2Mode(_Activity_)** ---> switch display to A2 mode
+  - **InkBookSDK.disableWebViewAutoRefresh(_Activity_)** ---> disable auto refreshing in webview on scrolling
+  - **InkBookSDK.enableWebViewAutoRefresh(_Activity_)** ---> enable auto refreshing in webview on scrolling (default)
+  - **InkBookSDK.refreshScreen(_Activity_)** ---> refresh device screen
   - **InkBookSDK.getPagesToRefresh(_Activity_)** ---> return pages count to refresh screen in reading mode
 
 

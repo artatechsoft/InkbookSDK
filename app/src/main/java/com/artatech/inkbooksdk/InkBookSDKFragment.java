@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.artatech.sdk.InkBookSDK;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -20,9 +20,9 @@ import butterknife.OnClick;
 public class InkBookSDKFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-    @InjectView(R.id.status_text)
+    @BindView(R.id.status_text)
     TextView mStatus;
-    @InjectView(R.id.text_pages)
+    @BindView(R.id.text_pages)
     TextView mPagesCount;
 
     public InkBookSDKFragment() {
@@ -39,7 +39,7 @@ public class InkBookSDKFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.inkbooksdk_fragment, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
         if (!InkBookSDK.isFullSupported() && !InkBookSDK.isRefreshSupport()) {
             //device is not InkBook
@@ -48,15 +48,18 @@ public class InkBookSDKFragment extends Fragment {
             rootView.findViewById(R.id.v_rapid).setEnabled(false);
             rootView.findViewById(R.id.v_refresh).setEnabled(false);
             rootView.findViewById(R.id.v_pages).setEnabled(false);
+            rootView.findViewById(R.id.v_a2).setEnabled(false);
             mPagesCount.setText("NOT SUPPORTED DEVICE FOR THIS ACTION");
         } else if (!InkBookSDK.isFullSupported() && InkBookSDK.isRefreshSupport()) {
             //device is InkBook Classic2
             mStatus.setText("REFRESH SUPPORT ONLY");
             rootView.findViewById(R.id.v_part).setEnabled(false);
             rootView.findViewById(R.id.v_rapid).setEnabled(false);
+            rootView.findViewById(R.id.v_a2).setEnabled(false);
         } else {
-            //device is InkBook Prome
+            //device is InkBook Prime
             rootView.findViewById(R.id.test_view).setVisibility(View.VISIBLE);
+            mStatus.setText(InkBookSDK.getCurrentRefreshMode(getActivity()));
         }
 
         return rootView;
@@ -65,7 +68,7 @@ public class InkBookSDKFragment extends Fragment {
     @OnClick(R.id.v_part)
     public void onPart() {
         if (InkBookSDK.setPARTMode(getActivity()))
-            updateStatus(true);
+            mStatus.setText(InkBookSDK.getCurrentRefreshMode(getActivity()));
         else
             mStatus.setText("NOT SUPPORTED DEVICE FOR THIS ACTION");
     }
@@ -73,7 +76,7 @@ public class InkBookSDKFragment extends Fragment {
     @OnClick(R.id.v_rapid)
     public void onRAPID() {
         if (InkBookSDK.setRAPIDMode(getActivity()))
-            updateStatus(false);
+            mStatus.setText(InkBookSDK.getCurrentRefreshMode(getActivity()));
         else
             mStatus.setText("NOT SUPPORTED DEVICE FOR THIS ACTION");
     }
@@ -85,16 +88,17 @@ public class InkBookSDKFragment extends Fragment {
 
     }
 
+    @OnClick(R.id.v_a2)
+    public void onA2() {
+        if (InkBookSDK.setA2Mode(getActivity()))
+            mStatus.setText(InkBookSDK.getCurrentRefreshMode(getActivity()));
+        else
+            mStatus.setText("NOT SUPPORTED DEVICE FOR THIS ACTION");
+    }
+
     @OnClick(R.id.v_pages)
     public void onGetPagesClick() {
         mPagesCount.setText(String.valueOf(InkBookSDK.getPagesToRefresh(getActivity())));
     }
 
-    private void updateStatus(boolean PART) {
-        if (PART) {
-            mStatus.setText("DISPLAY MODE: PART");
-        } else {
-            mStatus.setText("DISPLAY MODE: RAPID");
-        }
-    }
 }

@@ -37,9 +37,9 @@ public class DictionarySDKFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.dictsdk_fragment, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
-        if (!DictSDK.dictAppInstalled(getActivity())) {
+        if (!DictSDK.dictAppInstalled()) {
             rootView.findViewById(R.id.v_no_dict).setVisibility(View.VISIBLE);
         }
 
@@ -55,10 +55,23 @@ public class DictionarySDKFragment extends Fragment {
                 .setContainer((ViewGroup) rootView.findViewById(R.id.container));
 
 
-        widget.show();
+
 
 
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        widget.show();
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        widget.dismiss();
     }
 
 

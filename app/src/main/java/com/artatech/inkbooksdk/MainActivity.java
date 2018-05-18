@@ -47,14 +47,16 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             if (position == 0) {
                 return DictionarySDKFragment.newInstance(position + 1);
-            } else {
+            } else if (position == 1) {
                 return InkBookSDKFragment.newInstance(position + 1);
+            } else {
+                return WebViewSDKFragment.newInstance(position + 1);
             }
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
                     return "Dictionary SDK";
                 case 1:
                     return "InkBookSDK";
+                case 2:
+                    return "WebView";
             }
             return null;
         }
