@@ -4,7 +4,7 @@
 
 #### Powered by  [![N|Solid](https://static.wixstatic.com/media/d62b24_e50f96dd7eed455fa9ce2782af77c431.png/v1/fill/w_157,h_96,al_c,usm_0.66_1.00_0.01/d62b24_e50f96dd7eed455fa9ce2782af77c431.png)](https://www.artatech.pl/)
 
-##Preface
+## Preface
 This document gathers all information useful for adopting Android applications to be used on inkBOOK  E Ink devices.
 
 
@@ -178,12 +178,27 @@ You can also dismiss widget:
 widget.dismiss();
 ```
 
+#### Add ChromView support to the application
+
+To set default rendering engine to ChromeView you need to run method in Application class:
+
+```java
+public class YourApp extends Application {
+...
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        InkBookSDK.addChromiumSupport(this);
+	...
+    }
+```
 
 #### InkBookSDK usages
   - **InkBookSDK.isEInk(_Activity_)** ---> true if current device use E-Ink display
   - **InkBookSDK.isInkBook()** ---> true if device is InkBook (_InkBook Prime or InkBook Classic2_)
   - **InkBookSDK.isFullSupported()** ---> device can switch between PART and RAPID mode (_InkBook Prime_)
   - **InkBookSDK.isRefreshSupport()** ---> device can only refresh screen (_InkBook Classic2_)
+  - **InkBookSDK.addChromiumSupport(_Application_)** ---> sets Chromium as default rendering engine for applicartion.
   - **InkBookSDK.isChromiumUsed(_Activity_)** ---> return true if current WebView provider is Chromium
   - **InkBookSDK.getChromiumVersion(_Activity_)** ---> return version of Chromium used in system or "WebViewClassic" for old webview
   - **InkBookSDK.getCurrentRefreshMode()** ---> return name of current refresh mode (RAPID,PART,A2)
