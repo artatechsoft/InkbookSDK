@@ -115,68 +115,6 @@ Usage of dictionary widget described in section **Dictionary widget integration*
 # InkBookSDK
 
 ## inkBOOK specific features
-###### InkBookSDK allows not only use InkBook features also to integrate Dictionary SDK with yours applications
-##### IMPORTANT:
-**To Integrate DictionarySDK device must have InkBookDictionary application installed**
-
-
-### Dictionary widget integration
-   - install InkBookDictionary application (if not preinstalled)
-   - download [inkbooksdk.aar](https://github.com/artatechsoft/InkbookSDK/blob/master/inkbooksdk.aar)
-   - put the aar file in your libs directory and add a directory repository in _**build.gradle**_ file:
-```java
-   repositories {
-    flatDir {
-        dirs 'libs'
-    }
-}
-
-dependencies {
-    compile(name: 'inkbooksdk', ext: 'aar')
-}
-```
-
-   - Sync project with gradle
-
-
-#### Dictionary widget usage
-
-   - Initialize DictSDK with Application class and add this class to Manifest:
-
-```java
-   public class BuilderApplication extends Application {
-     @Override
-        public void onCreate() {
-            super.onCreate();
-            DictSDK.init(this,true);
-        }
-    }
-```
-
-```java
- <application
-        android:name=".BuilderApplication"
-```
-
-   - Create and show widget
-```java
-        DictViewBuilder widget = new DictViewBuilder(getActivity()) //creating new instance with context
-                .search("query") // set query to find in dictionary
-                .setDismissListener(new OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        Toast.makeText(getActivity(), "onDismiss", Toast.LENGTH_SHORT).show();
-                    }
-                }) // create onDismissListener (optional)
-                .setContainer((ViewGroup) getView().findViewById(R.id.container)); //set container View to show widget
-
-        widget.show(); // show widget in container View
-```
-
-You can also dismiss widget:
-```java
-widget.dismiss();
-```
 
 #### Add ChromView support to the application
 
