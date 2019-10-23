@@ -97,21 +97,24 @@ In some cases, when private DRM solution is being used or for other reasons cont
 Available widget space: **457x530 dp**
 
 ### Dictionary support
-inkBOOK introduces dictionary service based on MediaWiki Wiktionary project dump files, that are converted to local database and prepared for offline usage. Dictionary service is not necessary integration and it remains purely optional. However,  access to dictionaries directly from reader application is experienced highly appreciated by e-reader users. That’s why inkBOOK dictionary service is opened to be used even in third party applications.
-It is possible to search phrase directly in dictionary application. 
+inkBOOK introduces translation services based on GoogleTranslate.  Dialog with translation can be accessed through intent.  
+Dictionary service is not necessary integration and it remains purely optional. However,  access to dictionaries directly from reader application is experienced highly appreciated by e-reader users.
 
 ```java
-Intent intent = new Intent()
-.setComponent(new ComponentName("com.artatech.inkbook.inbookdictionary",  "com.artatech.inkbook.inbookdictionary.DictSearch.MainActivity"))
-.putExtra("search", "query")
-.putExtra("search_lang", "lang")
-.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+try {
+    Intent intent = new  Intent()
+    .setAction(Intent.ACTION_PROCESS_TEXT)
+    .putExtra(Intent.EXTRA_PROCESS_TEXT, text)
+    .setComponent( new ComponentName(
+            "com.google.android.apps.translate",
+            "com.google.android.apps.translate.copydrop.CopyDropActivity"));
 
-context.startActivity(intent);
-
+    context.startActivity(intent);
+} catch (ActivityNotFoundException e) {
+}
 ```
 
-Usage of dictionary widget described in section **Dictionary widget integration**.
+
 # InkBookSDK
 
 ## inkBOOK specific features
