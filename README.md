@@ -17,6 +17,12 @@ All pageturn and other animation effects should be removed. Rich animated interf
 ### Item lists - scrolling vs pagination
 inkBOOK Android system is customised for E Ink and can handle scroll events animation effects. However using scrolled lists in interface and especially scrolled content in activity windows is not recommended. In order to display scroll animation properly screen needs to change display mode form 16-level grayscale to black and white only and then go back to 16-level grayscale again when animation ends. Interfaces and content converted to 2 colours (black and white) does not look well, looses all of details and changing screen mode requires full screen refresh each time, which results in unpleasant screen flickering. 
 It is highly recommended to use list pagination instead of scrolling as often as possible.
+
+We have made avaiable custom paging recycler view, that can be used to replace Android RecyclerView.
+The view and information of how to use it can be found:
+
+https://gitlab.com/artatechsoft/artatech-android/inkbook-pagingrecyclerview
+
 ### Recommended colour range
 Due to nature of E Ink screen all colours are mapped to 16-level grayscale. In order to keep clean and sleek user interface we recommend using high contrasting colour scheme:
 
