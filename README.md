@@ -96,22 +96,44 @@ In some cases, when private DRM solution is being used or for other reasons cont
 
 Available widget space: **457x530 dp**
 
-### Dictionary support
-inkBOOK introduces dictionary service based on MediaWiki Wiktionary project dump files, that are converted to local database and prepared for offline usage. Dictionary service is not necessary integration and it remains purely optional. However,  access to dictionaries directly from reader application is experienced highly appreciated by e-reader users. That’s why inkBOOK dictionary service is opened to be used even in third party applications.
-It is possible to search phrase directly in dictionary application. 
+### Translator support
+inkBOOK introduces translation services based on Google Translate. Only the users that have accepted the GoogleTranslateLicence are able to use translator. The method below isGoogleTranslateInstalled(Context context) can be used to check wheater Translator support is enabled.
+
 
 ```java
-Intent intent = new Intent()
-.setComponent(new ComponentName("com.artatech.inkbook.inbookdictionary",  "com.artatech.inkbook.inbookdictionary.DictSearch.MainActivity"))
-.putExtra("search", "query")
-.putExtra("search_lang", "lang")
-.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    public static boolean isGoogleTranslateInstalled(Context context)
+    {
+         final String GOOGLE_TRANSLATE_PACKAGE = "com.google.android.apps.translate";
+         final String ARTATECH_GOOGLE_TRANSLATE_VERSION = "5.4.0.RC10.132942120";
+
+        PackageInfo pInfo = null;
+        try {
+            pInfo = context.getPackageManager().getPackageInfo(GOOGLE_TRANSLATE_PACKAGE, 0);
+            String version = pInfo.versionName;
+            return version.equals(ARTATECH_GOOGLE_TRANSLATE_VERSION);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+```
+
+In order to diplay trnaslator popup window intent below can be used, with extra variable text containg String that should be translated.
+
+```java
+     Intent intent = new  Intent();
+                intent.setAction(Intent.ACTION_PROCESS_TEXT);
+                intent.putExtra(Intent.EXTRA_PROCESS_TEXT, text);
+
+                intent.setComponent( new ComponentName(
+                        "com.google.android.apps.translate",
+                        "com.google.android.apps.translate.copydrop.CopyDropActivity"));
+                context.startActivity(intent);
 
 context.startActivity(intent);
 
 ```
 
-Usage of dictionary widget described in section **Dictionary widget integration**.
 # InkBookSDK
 
 ## inkBOOK specific features
