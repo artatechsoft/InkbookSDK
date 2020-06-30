@@ -102,6 +102,7 @@ In some cases, when private DRM solution is being used or for other reasons cont
 
 Available widget space: **457x530 dp**
 
+
 ### Translator support
 inkBOOK introduces translation services based on Google Translate. Only the users that have accepted the GoogleTranslateLicence are able to use translator. The method below isGoogleTranslateInstalled(Context context) can be used to check wheater Translator support is enabled.
 
