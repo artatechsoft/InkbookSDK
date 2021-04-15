@@ -1,0 +1,4 @@
+build
+/inkbooksdk/build
+.idea
+.gradle

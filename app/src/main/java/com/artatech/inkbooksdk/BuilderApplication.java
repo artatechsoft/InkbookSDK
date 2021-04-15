@@ -1,22 +1,24 @@
 package com.artatech.inkbooksdk;
 
 import android.app.Application;
+import android.util.Log;
 
-import com.artatech.dictsdk.DictSDK;
-import com.artatech.sdk.InkBookSDK;
+import androidx.multidex.MultiDexApplication;
 
 /**
  * Created by Goltstein on 21.12.16.
  */
 
-public class BuilderApplication extends Application {
+public class BuilderApplication extends MultiDexApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        DictSDK.init(this,true);
-
         //uncomment if you want to use Chromium
-        InkBookSDK.addChromiumSupport(this);
+        try {
+            InkBookSDK.Companion.addChromiumSupport(this, true);
+        } catch (Exception e){
+            Log.e("BuilderApplication", "", e);
+        }
     }
 }

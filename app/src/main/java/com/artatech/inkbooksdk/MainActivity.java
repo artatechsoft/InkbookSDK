@@ -8,9 +8,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
-
-import com.artatech.dictsdk.DictSDK;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,12 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-        updateVersion();
+       // updateVersion();
     }
 
     private void updateVersion() {
-        ((TextView) findViewById(R.id.text_v)).setText("lib version: " + DictSDK.getVersion());
+        //((TextView) findViewById(R.id.text_v)).setText("lib version: " + DictSDK.getVersion());
     }
 
 
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                return DictionarySDKFragment.newInstance(position + 1);
+                return InkBookSDKFragment.newInstance(position + 1);
             } else if (position == 1) {
                 return InkBookSDKFragment.newInstance(position + 1);
             } else {

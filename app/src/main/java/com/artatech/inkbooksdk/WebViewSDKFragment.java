@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.artatech.sdk.InkBookSDK;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -52,15 +50,6 @@ public class WebViewSDKFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.webviewsdk_fragment, container, false);
         ButterKnife.bind(this, rootView);
-
-        if (!InkBookSDK.isFullSupported() && !InkBookSDK.isRefreshSupport()) {
-            //device is not InkBook
-        } else if (!InkBookSDK.isFullSupported() && InkBookSDK.isRefreshSupport()) {
-            //device is InkBook Classic2
-        } else {
-            //device is InkBook Prime
-        }
-
         return rootView;
     }
 
@@ -91,7 +80,7 @@ public class WebViewSDKFragment extends Fragment {
             }
         });
 
-        Toast.makeText(getActivity(), "It's chromium : " + InkBookSDK.isChromiumUsed(getActivity())+ " version: " + InkBookSDK.getWebViewVersion(getActivity()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "It's chromium : " + InkBookSDK.Companion.isChromiumUsed(getActivity())+ " version: " + InkBookSDK.Companion.getWebViewVersion(getActivity()), Toast.LENGTH_SHORT).show();
 
         mUrlEdit.setText("https://www.artatech.pl/");
         onSearch();
@@ -124,13 +113,13 @@ public class WebViewSDKFragment extends Fragment {
 
     @OnClick(R.id.btn_disable_auto)
     public void onDisableAutorefresh() {
-        if (!InkBookSDK.disableWebViewAutoRefresh(getActivity()))
+        if (!InkBookSDK.Companion.disableWebViewAutoRefresh(getActivity()))
             Toast.makeText(getActivity(), "NOT SUPPORTED DEVICE FOR THIS ACTION", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.btn_enable_auto)
     public void onEnableAutorefresh() {
-        if (!InkBookSDK.enableWebViewAutoRefresh(getActivity()))
+        if (!InkBookSDK.Companion.enableWebViewAutoRefresh(getActivity()))
             Toast.makeText(getActivity(), "NOT SUPPORTED DEVICE FOR THIS ACTION", Toast.LENGTH_SHORT).show();
     }
 
