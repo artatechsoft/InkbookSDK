@@ -39,8 +39,8 @@ Because of nature of E Ink screen sometimes scaled images might appear more blur
 
 | Model             | Resolution  | Pixel Density |
 |-------------------|-------------|---------------|
-| inkBOOK Classic 2 | 600x800 px  | 167 dpi       |
-| inkBOOK Prime     | 768x1024 px | 212 dpi       |
+| inkBOOK Calypso plus | 1024x758 px  | 212 dpi       |
+| inkBOOK Focus     | 1872x1404 px | 300 dpi       |
  
 ## Power management features
 ### Background synchronization
