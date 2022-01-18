@@ -182,6 +182,24 @@ context.startActivity(intent);
   - **InkBookSDK.setBrightness(__Activity__, __Int__)** --> change brightness to introduced value (max 255)
   - **InkBookSDK.setTemperature(__Activity__, __Int__)** --> change temperature to introduced value (max 255)
 
+### InkBookSDK available modes
+
+```java
+class EInkRefreshUtil {
+public static int EPD_NULL=-1;
+public static int EPD_AUTO=0;
+public static int EPD_FULL=1;
+public static int EPD_A2=2;
+public static int EPD_PART=3;
+}
+```
+
+EPD_NULL: Invaid mode.
+EPD_AUTO: Auto mode, generally used in the scenarios which require fast response such as keyboard, combining two waveform data of GARY16 and DU modes, and it will automatically select GARY16 or DU waveform data according to the grey value of the pixels. This mode implements continuous multi-region refresh at the same time through algorithm, which has the fastest refresh speed and supports 16 grey refresh.
+EPD_FULL: Full refresh mdoe, completely use GARY16 waveform data to refresh the screen. This mode has the slowest refresh speed, with less residue but it will flicker. can be used to periodically clear the residue caused by the refresh of other modes.
+EPD_A2: A2 mode, generally used for reading mode. Comparing the data of before and after frames, the changed pixels use A2 waveform data, and the waveform data of the unchanged pixels are 0. Only support the refresh of balck and white. When the application selects this mode, the system will automatically refresh with DU mdoe before refresh with A2 mode, in order to adapt with the change from 16 grey scale to 2 grey scale. Besides, this mode has dither algorithm. This mode has fast refresh speed, and can be used in video, picture and other scenarios.
+EPD_PART: normal part refresh mode, comparing with the data of before and after frames, the changed pixels use GRAY16 waveform data, and the waveform data of the unchanged pixels are 0. support 16 grey refresh, comparing with EPD_FULL mode, there is no feeling of flicker during refresh.
+
 Chromium methods are unsupported for Focus and Calypso Plus devices.
 
 
