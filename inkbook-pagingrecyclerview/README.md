@@ -13,7 +13,7 @@ Scrolling animations do not look good on E-ink devices, because of low screen re
 
 In order to use the library you just have to copy the .aar file from:
 
-https://gitlab.com/artatechsoft/artatech-android/inkbook-pagingrecyclerview/blob/master/pagingview/pagingview-release.aar
+https://github.com/artatechsoft/InkbookSDK/tree/master/inkbook-pagingrecyclerview-library
 
 To your application library folder. Then you can add the view to your layout like this:
 ```xml
@@ -29,7 +29,7 @@ To your application library folder. Then you can add the view to your layout lik
 PagingRecyclerView.Adapter<RecyclerView.ViewHolder> works the same as RecyclerView.Adapter<RecyclerView.ViewHolder>. 
 Example PagingRecyclerView.Adapter implementation can be found:
 
-https://gitlab.com/artatechsoft/artatech-android/inkbook-pagingrecyclerview/blob/master/app/src/main/java/pl/goltstein/staticscrollexample/RVLanguageAdapter.kt
+https://github.com/artatechsoft/InkbookSDK/blob/master/inkbook-pagingrecyclerview/app/src/main/java/pl/goltstein/staticscrollexample/RVLanguageAdapter.kt
 
 ## Layout Manager
 
