@@ -182,6 +182,8 @@ context.startActivity(intent);
   - **InkBookSDK.setBrightness(__Activity__, __Int__)** --> change brightness to introduced value (max 255)
   - **InkBookSDK.setTemperature(__Activity__, __Int__)** --> change temperature to introduced value (max 255)
 
+Chromium methods are unsupported for Focus and Calypso Plus devices.
+
 ### InkBookSDK available modes
 
 ```java
@@ -200,6 +202,5 @@ EPD_FULL: Full refresh mdoe, completely use GARY16 waveform data to refresh the 
 EPD_A2: A2 mode, generally used for reading mode. Comparing the data of before and after frames, the changed pixels use A2 waveform data, and the waveform data of the unchanged pixels are 0. Only support the refresh of balck and white. When the application selects this mode, the system will automatically refresh with DU mdoe before refresh with A2 mode, in order to adapt with the change from 16 grey scale to 2 grey scale. Besides, this mode has dither algorithm. This mode has fast refresh speed, and can be used in video, picture and other scenarios.  
 EPD_PART: normal part refresh mode, comparing with the data of before and after frames, the changed pixels use GRAY16 waveform data, and the waveform data of the unchanged pixels are 0. support 16 grey refresh, comparing with EPD_FULL mode, there is no feeling of flicker during refresh.  
 
-Chromium methods are unsupported for Focus and Calypso Plus devices.
 
 
