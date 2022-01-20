@@ -35,7 +35,7 @@ https://github.com/artatechsoft/InkbookSDK/blob/master/inkbook-pagingrecyclervie
 
 PagingRecyclerView can be used with the same Layout Managers as standard Android RecyclerView.
 
-## Channing Page
+## Changing Page
 
 Paging recycler view has bottom navigation bar with buttons enabling user to change page. Pages can be also changed programmatically by calling adapter methods:
 
