@@ -98,7 +98,7 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 
 ### How to properly refresh screen
-In order to avoid unwanted so called ghosting effect (when part of previous screen context remains as a shadow on the screen), it is necessary to perform full screen refresh from time to time. Full screen refresh causes black and white blink on screen and uses more power when normal partial refresh, so it should be used as seldom as possible. User defines prefered fullscreen refreshment interval in device settings quantified as number of page turns until full screen refresh.
+In order to avoid unwanted so called ghosting effect (when part of previous screen context remains as a shadow on the screen), it is necessary to perform full screen refresh from time to time. Full screen refresh causes black and white blink on screen and uses more power when normal partial refresh, so it should be used  with reasonable aproach. User defines prefered fullscreen refreshment interval in device Settings quantified as number of page turns until full screen refresh.
 This value could be accessed by calling code:
 
     InkBookSDK.getPagesToRefresh(_Activity_)
@@ -201,6 +201,6 @@ EPD_A2: A2 mode, generally used for video, picture and other scenarios. Comparin
 
 
 
-LIST OF COMPATIBLE DEVICES:
+### LIST OF COMPATIBLE DEVICES:
 1. inkBOOK Calypso plus 6"
 2. inkBOOK Focus 7,8"
