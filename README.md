@@ -165,7 +165,7 @@ context.startActivity(intent);
 
 # InkBookSDK
 
-## InkBookSDK usages ( InkBookSdk library works only on PX30 devices)
+## InkBookSDK usages ( InkBookSdk library works only with compatible devices, listed below)
   - **InkBookSDK.isEInk(_Activity_)** ---> true if current device use E-Ink display
   - **InkBookSDK.isInkBook()** ---> true if device is InkBook
   - **InkBookSDK.refreshScreen(__Activity__)** ---> refresh device screen
@@ -204,3 +204,6 @@ EPD_PART: normal part refresh mode, comparing with the data of before and after 
 
 
 
+LIST OF COMPATIBLE DEVICES:
+1. inkBOOK Calypso plus 6"
+2. inkBOOK Focus 7,8"
