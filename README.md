@@ -199,14 +199,15 @@ EPD_FULL: Full refresh mode, completely use GRAY16 waveform data to refresh the 
 EPD_A2: A2 mode, generally used for video, picture and other scenarios. Comparing the data of before and after frames, the changed pixels use A2 waveform data, and the waveform data of the unchanged pixels are 0. Only support the refresh of black and white. When the application selects this mode, the system will automatically refresh with DU mode before refresh with A2 mode, in order to adapt with the change from 16 grey scale to 2 grey scale. Besides, this mode has dither algorithm. This mode has fast refresh speed.  
 
 Fragment of example code how to use above modes:
-fun changeMode(view : View, mode : Int){
+
+```fun changeMode(view : View, mode : Int){
         InkBookSDK.refreshView(view, mode)
     }
 
     fun changeMode(activity : Activity, mode : Int){
         InkBookSDK.refresh(activity, mode)
     }
-    
+    ```
 
 
 ### LIST OF COMPATIBLE DEVICES:
