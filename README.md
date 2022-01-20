@@ -214,6 +214,6 @@ public static int EPD_A2=2;
 }
 ```
 
-### LIST OF COMPATIBLE DEVICES:
+#### LIST OF COMPATIBLE DEVICES:
 1. inkBOOK Calypso plus 6"
 2. inkBOOK Focus 7,8"
