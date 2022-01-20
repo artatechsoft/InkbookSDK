@@ -98,9 +98,49 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 
 ### How to properly refresh screen
-In order to avoid unwanted so called ghosting effect (when part of previous screen context remains as a shadow on the screen), it is necessary to perform full screen refresh from time to time. Full screen refresh causes black and white blink on screen and uses more power when normal partial refresh, so it should be used  with reasonable aproach. User defines prefered fullscreen refreshment interval in device Settings quantified as number of page turns until full screen refresh.
+Major diffrence between e-paper and other types of displays is managing refresh. E-Ink screen does not automaticaly refresh. It is refreshed by system only when it's context changes. 
+Aditionaly, screen my refresh itself using difrent modes/strategies that prioritise different parameters like speed, image quality, ghosting effects (discussed later on).
 
-Then to invoke full screen refresh:
+#### Reading mode
+
+Reading mode or Full refresh mode, use full capabilities of 16-leve grayscale to refresh the screen. This mode has the slowest refresh speed (450-520ms), with less residue but it may cause flickering effect when displaying more dynamic content. Can be also used to periodically clear the residue/ghosting caused by the refresh of other modes. This mode should be used to display text and high quality grayscale images.
+
+Example code to invoke this mode:
+
+```kotlin
+fun changeMode(view : View, mode : Int){ 
+    InkBookSDK.refreshView(view, EInkRefreshUtil.EPD_FULL)
+}
+
+fun changeMode(activity : Activity, mode : Int){
+    InkBookSDK.refresh(activity, EInkRefreshUtil.EPD_FULL)
+}
+
+```
+
+#### Scrolling mode
+
+Scrolling mode also known as A2 mode, is generally used to display dynamic content like video, motion picture, dynamic UI components and other scenarios. In current implemantation it reduces grayscale from 16 to 4-levels. This allows to perform much faster screen updates (around 120-200 ms) by sacrificing detail of displayed image. 
+
+Example code to invoke this mode
+
+```kotlin
+fun changeMode(view : View, mode : Int){ 
+    InkBookSDK.refreshView(view, EInkRefreshUtil.EPD_A2)
+}
+
+fun changeMode(activity : Activity, mode : Int){
+    InkBookSDK.refresh(activity, EInkRefreshUtil.EPD_A2)
+}
+
+```
+Please note, that invoking this mode in View could be useful to display scrollable menus.
+
+#### Forcing full screen refresh
+
+In order to avoid unwanted so called ghosting effect (when part of previous screen context remains as a shadow on the screen), it is necessary to perform full screen refresh from time to time. Full screen refresh causes black and white blink on screen and uses more power when normal partial refresh, so it should be used  with reasonable aproach. User defines prefered fullscreen refresh interval in device Settings quantified as number of page turns until full screen refresh. 
+
+To invoke full screen refresh simply force realoding currently used screen refresh mode:
 
 ```kotlin
     fun changeMode(activity : Activity){
@@ -153,21 +193,18 @@ context.startActivity(intent);
 
 ```
 
-# InkBookSDK
+# inkBookSDK methods referance
 
-## InkBookSDK usages ( InkBookSdk library works only with compatible devices, listed below)
-  - **InkBookSDK.isEInk(_Activity_)** ---> true if current device use E-Ink display
-  - **InkBookSDK.isInkBook()** ---> true if device is InkBook
+  - **InkBookSDK.isInkBook()** ---> true if device is inkBOOK
   - **InkBookSDK.refreshView(__View__, __Int__)** ---> refresh view by introduced mode
-  - **InkBookSDK.refresh(__Activity__, __Int__)** ---> refresh device screen by introduced mode
-  - **InkBookSDK.getBrightness(__Activity__)** --> return current value of brightness
-  - **InkBookSDK.getTemperature(__Activity__)** --> return current value of temperature
-  - **InkBookSDK.setBrightness(__Activity__, __Int__)** --> change brightness to introduced value (max 255)
-  - **InkBookSDK.setTemperature(__Activity__, __Int__)** --> change temperature to introduced value (max 255)
+  - **InkBookSDK.refresh(__Activity__, __Int__)** ---> refresh device screen (Activity) by introduced mode
+  - **InkBookSDK.getBrightness(__Activity__)** --> return current value of built-in light brightness
+  - **InkBookSDK.getTemperature(__Activity__)** --> return current value of built-in light temperature (ratio between cold and warm light)
+  - **InkBookSDK.setBrightness(__Activity__, __Int__)** --> change built-in light brightness to introduced value (max 255)
+  - **InkBookSDK.setTemperature(__Activity__, __Int__)** --> change built-in light temperature to introduced value (max 255)
 
-Chromium methods are unsupported for Focus and Calypso Plus devices.
 
-### InkBookSDK available modes
+### inkBookSDK refresh modes referance (used by InkBookSDK.refresh() and InkBookSDK.refreshView())
 
 ```java
 class EInkRefreshUtil {
@@ -177,21 +214,6 @@ public static int EPD_A2=2;
 }
 ```
 
-EPD_NULL: Invalid mode.  
-EPD_FULL: Full refresh mode, completely use GRAY16 waveform data to refresh the screen. This mode has the slowest refresh speed, with less residue but it will flicker. can be used to periodically clear the residue caused by the refresh of other modes.  
-EPD_A2: A2 mode, generally used for video, picture and other scenarios. Comparing the data of before and after frames, the changed pixels use A2 waveform data, and the waveform data of the unchanged pixels are 0. Only support the refresh of black and white. When the application selects this mode, the system will automatically refresh with DU mode before refresh with A2 mode, in order to adapt with the change from 16 grey scale to 2 grey scale. Besides, this mode has dither algorithm. This mode has fast refresh speed.  
-
-Fragment of example code how to use above modes:
-```kotlin
-fun changeMode(view : View, mode : Int){ 
-    InkBookSDK.refreshView(view, mode)
-}
-
-fun changeMode(activity : Activity, mode : Int){
-    InkBookSDK.refresh(activity, mode)
-}
-
-```
-LIST OF COMPATIBLE DEVICES:
+### LIST OF COMPATIBLE DEVICES:
 1. inkBOOK Calypso plus 6"
 2. inkBOOK Focus 7,8"
