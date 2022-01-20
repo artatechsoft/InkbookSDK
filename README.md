@@ -15,7 +15,7 @@ Dark backgrounds and colorful gradients should be avoided.  When graphic is scal
 ### Animation effects
 All pageturn and other animation effects should be removed. Rich animated interface will not be displayed properly in E Ink environment. This may lead to unpleasant screen flickering, random erratic screen refreshments or at least odd behaviour of interface components.
 ### Item lists - scrolling vs pagination
-inkBOOK Android system is customised for E Ink and can handle scroll events animation effects. However using scrolled lists in interface and especially scrolled content in activity windows is not recommended. In order to display scroll animation properly screen needs to change display mode form 16-level grayscale to black and white only and then go back to 16-level grayscale again when animation ends. Interfaces and content converted to 2 colours (black and white) does not look well, looses all of details and changing screen mode requires full screen refresh each time, which results in unpleasant screen flickering. 
+inkBOOK Android system is customised for E Ink and can handle scroll events animation effects. However using scrolled lists in interface and especially scrolled content in activity windows is not recommended. In order to display scroll animation properly screen needs to change display mode form 16-level grayscale to black and white only or 4-level grayscale and then go back to 16-level grayscale again when animation ends. Interfaces and content with reduced grayscale does not look well, looses all of details and changing screen mode requires full screen refresh each time, which results in unpleasant screen flickering. 
 It is highly recommended to use list pagination instead of scrolling as often as possible.
 
 We have made avaiable custom paging recycler view, that can be used to replace Android RecyclerView.
@@ -41,7 +41,7 @@ Due to nature of E Ink screen all colours are mapped to 16-level grayscale. In o
 | Reverse notation Background | #000000 |
 |  Reverse notation Text      | #ffffff |
 ### Images
-Because of nature of E Ink screen sometimes scaled images might appear more blurry than the same images used as tablet/smartphone UI elements. It is highly recommended to perform visual verification of all image UI elements and icons prior to application release. If some of graphic are blurry, we recommend to prepare them in exact required resolution in order to avoid software scaling down or scaling up. Current screen parameters are:
+Because of nature of E Ink screen sometimes scaled images might appear more blurry than the same images used as tablet/smartphone UI elements. It is highly recommended to perform visual verification of all non-SVG  UI elements and icons prior to application release. If some of graphic are blurry, we recommend to prepare them in exact required resolution in order to avoid software scaling down or scaling up. Current screen parameters are:
 
 | Model             | Resolution  | Pixel Density |
 |-------------------|-------------|---------------|
@@ -51,9 +51,9 @@ Because of nature of E Ink screen sometimes scaled images might appear more blur
 ## Power management features
 ### Background synchronization
 In order to keep power usage optimal all background data processing should be limited to absolute minimum to avoid high CPU loads and allow system to enter Idle state as often as possible.
-Additionally WiFi connectivity should never be used for extended period of time and especially it’s not recommended to keep WiFi connection up artificially (WiFi automatically powers down after few minutes of inactivity). During WiFi data transfer inkBOOK power usage might increase up to 10 times of normal battery consumption. As result extensive WiFi usage may reduce weeks of battery lifetime to merely days. 
+Additionally WiFi connectivity should never be used for extended period of time and especially it’s not recommended to keep WiFi connection up artificially (WiFi automatically powers down after few minutes of inactivity). During WiFi data transfer inkBOOK power usage might increase several times above normal battery consumption. As result extensive WiFi usage may reduce weeks of battery lifetime to merely days. 
 ### Idle mode
-The significant difference between reading apps designed to be used on smartphone/tablet and e-reader is how the Idle mode is handled. Devices using standard LCD screens tend to dim or power down screen when entering Idle mode. This is unwanted behaviour, so Idle mode is often being disabled in reader app. E-reader screen does not require any power to keep it’s current state, so this problem does not exist at all.
+The significant difference between reading apps designed to be used on smartphone/tablet and e-reader is how the Idle mode is handled. Devices using standard LCD screens tend to dim or power down screen when entering Idle mode. This is undesired behaviour, so Idle mode is often being disabled in reader app. E-reader screen does not require any power to keep it’s current state, so this problem does not exist at all.
 In order to keep power usage optimal it is highly recommended to remove or disable all code preventing Android from entering Idle mode. Example:
 ```java
 myWakeLock.acquire();  // prevent Idle
@@ -62,7 +62,7 @@ myWakeLock.release();  // allow Idle
 ```
 Neglecting proper Idle mode management may lead to increase of battery usage up to 3 times more than normal.
 ### Device identification
-It is understandable that developing separate Android application just for e-reader usage might not be the best business approach. However, it is very easy to identify inkBOOK e-reader and relay on this information to diversify crucial parts of code and user interfaces.
+It is understandable that developing separate Android application just for e-reader usage might not be the best business approach. In order to make developing single app for inkBOOK, smartphones, tablets possible, SDK has been equiped with the method that alows very easily to identify inkBOOK e-reader and relay on this information to diversify crucial parts of code and user interfaces.
 
 To properly identify inkBOOK e-reader:
 
