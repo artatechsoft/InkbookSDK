@@ -107,7 +107,7 @@ Then to invoke full screen refresh:
 
 	InkBookSDK.refreshScreen(_context_)
 
-inkBOOK Prime is using advanced E Ink driver that can reduce ghosting effect significantly and improve screen performance (Rapid Refresh), but it is less efficient with non-vector (generally not text) content. That’s why two separate screen refresh modes were implemented:
+inkBOOK devices are using advanced E Ink driver that can reduce ghosting effect significantly and improve screen performance (Rapid Refresh), but it is less efficient with non-vector (generally not text) content. That’s why two separate screen refresh modes were implemented:
 Rapid Refresh Mode - recommended for text viewing,
 
     InkBookSDK.setRAPIDMode(_context_)
