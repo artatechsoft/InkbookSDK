@@ -41,40 +41,18 @@ public class InkBookSDKFragment extends Fragment {
         return rootView;
     }
 
-    @OnClick(R.id.v_part)
-    public void onPart() {
-        if (InkBookSDK.Companion.setPARTMode(getActivity()))
-            mStatus.setText(InkBookSDK.Companion.getCurrentRefreshMode(getActivity()).toString());
-        else
-            mStatus.setText("NOT SUPPORTED DEVICE FOR THIS ACTION");
-    }
-
-    @OnClick(R.id.v_rapid)
-    public void onRAPID() {
-        if (InkBookSDK.Companion.setRAPIDMode(getActivity()))
-            mStatus.setText(InkBookSDK.Companion.getCurrentRefreshMode(getActivity()).toString());
-        else
-            mStatus.setText("NOT SUPPORTED DEVICE FOR THIS ACTION");
-    }
-
     @OnClick(R.id.v_refresh)
     public void onRefresh() {
-        if (!InkBookSDK.Companion.refreshScreen(getActivity()))
+        if (!InkBookSDK.Companion.refresh(getActivity(), EInkRefreshUtil.Companion.getEPD_FULL()))
             mStatus.setText("NOT SUPPORTED DEVICE FOR THIS ACTION");
 
     }
 
     @OnClick(R.id.v_a2)
     public void onA2() {
-        if (InkBookSDK.Companion.setA2Mode(getActivity()))
-            mStatus.setText(InkBookSDK.Companion.getCurrentRefreshMode(getActivity()).toString());
+        if (InkBookSDK.Companion.isInkBook())
+            InkBookSDK.Companion.refresh(getActivity(), EInkRefreshUtil.Companion.getEPD_A2());
         else
             mStatus.setText("NOT SUPPORTED DEVICE FOR THIS ACTION");
     }
-
-    @OnClick(R.id.v_pages)
-    public void onGetPagesClick() {
-        mPagesCount.setText(String.valueOf(InkBookSDK.Companion.getPagesToRefresh(getActivity())));
-    }
-
 }

@@ -14,11 +14,5 @@ public class BuilderApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        //uncomment if you want to use Chromium
-        try {
-            InkBookSDK.Companion.addChromiumSupport(this, true);
-        } catch (Exception e){
-            Log.e("BuilderApplication", "", e);
-        }
     }
 }

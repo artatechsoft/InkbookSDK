@@ -80,8 +80,6 @@ public class WebViewSDKFragment extends Fragment {
             }
         });
 
-        Toast.makeText(getActivity(), "It's chromium : " + InkBookSDK.Companion.isChromiumUsed(getActivity())+ " version: " + InkBookSDK.Companion.getWebViewVersion(getActivity()), Toast.LENGTH_SHORT).show();
-
         mUrlEdit.setText("https://www.artatech.pl/");
         onSearch();
     }
@@ -109,19 +107,4 @@ public class WebViewSDKFragment extends Fragment {
             mWebview.reload();
         }
     }
-
-
-    @OnClick(R.id.btn_disable_auto)
-    public void onDisableAutorefresh() {
-        if (!InkBookSDK.Companion.disableWebViewAutoRefresh(getActivity()))
-            Toast.makeText(getActivity(), "NOT SUPPORTED DEVICE FOR THIS ACTION", Toast.LENGTH_SHORT).show();
-    }
-
-    @OnClick(R.id.btn_enable_auto)
-    public void onEnableAutorefresh() {
-        if (!InkBookSDK.Companion.enableWebViewAutoRefresh(getActivity()))
-            Toast.makeText(getActivity(), "NOT SUPPORTED DEVICE FOR THIS ACTION", Toast.LENGTH_SHORT).show();
-    }
-
-
 }

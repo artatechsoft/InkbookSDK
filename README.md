@@ -99,24 +99,14 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 ### How to properly refresh screen
 In order to avoid unwanted so called ghosting effect (when part of previous screen context remains as a shadow on the screen), it is necessary to perform full screen refresh from time to time. Full screen refresh causes black and white blink on screen and uses more power when normal partial refresh, so it should be used  with reasonable aproach. User defines prefered fullscreen refreshment interval in device Settings quantified as number of page turns until full screen refresh.
-This value could be accessed by calling code:
-
-    InkBookSDK.getPagesToRefresh(_Activity_)
 
 Then to invoke full screen refresh:
 
-	InkBookSDK.refreshScreen(_context_)
-
-inkBOOK devices are using advanced E Ink driver that can reduce ghosting effect significantly and improve screen performance (Rapid Refresh), but it is less efficient with non-vector (generally not text) content. That’s why two separate screen refresh modes were implemented:
-Rapid Refresh Mode - recommended for text viewing,
-
-    InkBookSDK.setRAPIDMode(_context_)
-
-Part Refresh Mode - recommended for all other activities.
-	
-	InkBookSDK.setPARTMode(_context_)
-
-In order to achieve the best performance Rapid Refresh mode should be used for browsing text. However, any other activity like opening any kind of menu, closing book, etc. should be followed by switching back to Part Refresh Mode. Forcing system to work in Rapid Refresh Mode may cause issues with displaying Android UI components. For example: partial ghosting effects on UI icons, smudges on animations. 
+```kotlin
+    fun changeMode(activity : Activity){
+        InkBookSDK.refresh(activity, EInkRefreshUtil.EPD_FULL)
+    }
+```
 
 ## Optional integrations
 ### Main screen widget
@@ -168,15 +158,8 @@ context.startActivity(intent);
 ## InkBookSDK usages ( InkBookSdk library works only with compatible devices, listed below)
   - **InkBookSDK.isEInk(_Activity_)** ---> true if current device use E-Ink display
   - **InkBookSDK.isInkBook()** ---> true if device is InkBook
-  - **InkBookSDK.refreshScreen(__Activity__)** ---> refresh device screen
-  - **InkBookSDK.refreshView(__View__)** ---> refresh device screen
-  - **InkBookSDK.setA2Mode(__Activity__)** ---> switch display to A2 mode
-  - **InkBookSDK.a2View(__View__)** ---> switch view to A2 mode
-  - **InkBookSDK.refresh(__Activity__)** ---> refresh device screen
-  - **InkBookSDK.refreshScreen(__Activity__, __Int__)** ---> refresh device screen by introduced mode
   - **InkBookSDK.refreshView(__View__, __Int__)** ---> refresh view by introduced mode
   - **InkBookSDK.refresh(__Activity__, __Int__)** ---> refresh device screen by introduced mode
-  - **InkBookSDK.getCurrentRefreshMode()** ---> return name of current refresh mode (RAPID,PART,A2)
   - **InkBookSDK.getBrightness(__Activity__)** --> return current value of brightness
   - **InkBookSDK.getTemperature(__Activity__)** --> return current value of temperature
   - **InkBookSDK.setBrightness(__Activity__, __Int__)** --> change brightness to introduced value (max 255)
@@ -199,16 +182,14 @@ EPD_FULL: Full refresh mode, completely use GRAY16 waveform data to refresh the 
 EPD_A2: A2 mode, generally used for video, picture and other scenarios. Comparing the data of before and after frames, the changed pixels use A2 waveform data, and the waveform data of the unchanged pixels are 0. Only support the refresh of black and white. When the application selects this mode, the system will automatically refresh with DU mode before refresh with A2 mode, in order to adapt with the change from 16 grey scale to 2 grey scale. Besides, this mode has dither algorithm. This mode has fast refresh speed.  
 
 Fragment of example code how to use above modes:
-```
-fun changeMode(view : View, mode : Int){
-        InkBookSDK.refreshView(view, mode)
-    }
+```kotlin
+fun changeMode(view : View, mode : Int){ 
+    InkBookSDK.refreshView(view, mode)
+}
 
-    fun changeMode(activity : Activity, mode : Int){
-        InkBookSDK.refresh(activity, mode)
-    }
-    ``` 
-
+fun changeMode(activity : Activity, mode : Int){
+    InkBookSDK.refresh(activity, mode)
+}
 
 ```
 LIST OF COMPATIBLE DEVICES:

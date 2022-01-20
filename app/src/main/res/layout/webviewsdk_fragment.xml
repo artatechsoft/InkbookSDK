@@ -60,22 +60,6 @@
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
-
-        <Button
-            android:id="@+id/btn_disable_auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:text="disable Autorefresh" />
-
-        <Button
-            android:id="@+id/btn_enable_auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:text="enable Autorefresh" />
     </LinearLayout>
 
 </RelativeLayout>

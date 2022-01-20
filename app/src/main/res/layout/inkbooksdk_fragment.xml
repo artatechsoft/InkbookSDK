@@ -19,23 +19,12 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/v_pages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="get refresh pages count"
-        android:layout_below="@+id/textView5"
-        android:layout_alignStart="@+id/textView5" />
-
     <TextView
         android:id="@+id/text_pages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/v_pages"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/v_pages"
         android:layout_marginEnd="16dp"
-        android:layout_toEndOf="@+id/v_pages"
         android:gravity="center_vertical"
         android:paddingStart="16dp"
         android:text="pages count" />
@@ -44,7 +33,6 @@
         android:id="@+id/separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/v_pages"
         android:layout_marginTop="4dp"
         android:background="#000" />
 
@@ -109,21 +97,6 @@
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/v_part"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:text="PART" />
-
-        <Button
-            android:id="@+id/v_rapid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:text="RAPID" />
 
         <Button
             android:id="@+id/v_a2"
