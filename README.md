@@ -99,11 +99,11 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 ### How to properly refresh screen
 Major diffrence between e-paper and other types of displays is managing refresh. E-Ink screen does not automaticaly refresh. It is refreshed by system only when it's context changes. 
-Aditionaly, screen my refresh itself using difrent modes/strategies that prioritise different parameters like speed, image quality, ghosting effects (discussed later on).
+Aditionaly, screen may refresh itself using difrent modes/strategies that prioritise different parameters like speed, image quality, ghosting effects (discussed later on).
 
 #### Reading mode
 
-Reading mode or Full refresh mode, use full capabilities of 16-leve grayscale to refresh the screen. This mode has the slowest refresh speed (450-520ms), with less residue but it may cause flickering effect when displaying more dynamic content. Can be also used to periodically clear the residue/ghosting caused by the refresh of other modes. This mode should be used to display text and high quality grayscale images.
+Reading mode or Full refresh mode, use full capabilities of 16-level grayscale to refresh the screen. This mode has the slowest refresh speed (450-520ms), with less residue but it may cause flickering effect when displaying more dynamic content. Can be also used to periodically clear the residue/ghosting caused by the refresh of other modes. This mode should be used to display text and high quality grayscale images.
 
 Example code to invoke this mode:
 
@@ -117,6 +117,8 @@ fun changeMode(activity : Activity, mode : Int){
 }
 
 ```
+Remark:
+Please note that changeMode() may consume either View or Activity object, but refresh mode change will affect whole screen.
 
 #### Scrolling mode
 
@@ -134,19 +136,37 @@ fun changeMode(activity : Activity, mode : Int){
 }
 
 ```
-Please note, that invoking this mode in View could be useful to display scrollable menus.
+Please note, that invoking this mode could be useful to display scrollable menus.
+
+Remark:
+Please note that changeMode() may consume either View or Activity object, but refresh mode change will affect whole screen.
 
 #### Forcing full screen refresh
 
-In order to avoid unwanted so called ghosting effect (when part of previous screen context remains as a shadow on the screen), it is necessary to perform full screen refresh from time to time. Full screen refresh causes black and white blink on screen and uses more power when normal partial refresh, so it should be used  with reasonable aproach. User defines prefered fullscreen refresh interval in device Settings quantified as number of page turns until full screen refresh. 
+In order to avoid unwanted so called ghosting effect (when part of previous screen context remains as a shadow on the screen), it is necessary to perform full screen refresh from time to time. Full screen refresh causes black and white blink on screen and uses more power when normal partial refresh, so it should be used  with reasonable aproach. User defines prefered fullscreen refresh interval in device Settings quantified as number of page turns until full screen refresh. This action is managed automaticaly by the system. However, in some rare scenarious it may be nessesary to invoke full screen refresh manually to improve user expariance and clear ghosting effects form the screen.
 
-To invoke full screen refresh simply force realoding currently used screen refresh mode:
+To invoke full screen refresh simply force realoding currently used screen refresh mode. Example:
 
 ```kotlin
     fun changeMode(activity : Activity){
         InkBookSDK.refresh(activity, EInkRefreshUtil.EPD_FULL)
     }
 ```
+
+#### using dark mode (night mode)
+
+Extensive use of dark backgrounds may increase ghosting efects on the screen. In order to mitigate negative effects and improve user experiance inkBOOK is using separate screen setting prest, that is altering refresh algorithm.
+Each time high contrast night mode (white text on black background) is used in reading app, night mode should also be activated and disabled acordingly in inkBOOK SDK.
+
+This could be done by using methods:
+
+```kotlin
+   
+   InkBookSDK.enterNightMode(__Activity__);
+   InkBookSDK.exitNightMode(__Activity__);
+    
+```
+
 
 ## Optional integrations
 ### Main screen widget
@@ -202,18 +222,19 @@ context.startActivity(intent);
   - **InkBookSDK.getTemperature(__Activity__)** --> return current value of built-in light temperature (ratio between cold and warm light)
   - **InkBookSDK.setBrightness(__Activity__, __Int__)** --> change built-in light brightness to introduced value (max 255)
   - **InkBookSDK.setTemperature(__Activity__, __Int__)** --> change built-in light temperature to introduced value (max 255)
+  - **InkBookSDK.enterNightMode(__Activity__)** --> activate night mode screen refresh strategy
+  - **InkBookSDK.exitNightMode(__Activity__)** --> deactivate night mode screen refresh strategy
 
 
-### inkBookSDK refresh modes referance (used by InkBookSDK.refresh() and InkBookSDK.refreshView())
+## inkBookSDK refresh modes referance (used by InkBookSDK.refresh() and InkBookSDK.refreshView())
 
 ```java
 class EInkRefreshUtil {
-public static int EPD_NULL=-1;
 public static int EPD_FULL=1;
 public static int EPD_A2=2;
 }
 ```
 
-#### LIST OF COMPATIBLE DEVICES:
+# LIST OF COMPATIBLE DEVICES:
 1. inkBOOK Calypso plus 6"
 2. inkBOOK Focus 7,8"
