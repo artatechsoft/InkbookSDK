@@ -155,8 +155,8 @@ To invoke full screen refresh simply force realoding currently used screen refre
 
 #### using dark mode (night mode)
 
-Extensive use of dark backgrounds may increase ghosting efects on the screen. In order to mitigate negative effects and improve user experiance inkBOOK is using separate screen setting prest, that is altering refresh algorithm.
-Each time high contrast night mode (white text on black background) is used in reading app, night mode should also be activated and disabled acordingly in inkBOOK SDK.
+Extensive use of dark backgrounds may increase ghosting efects on the screen. In order to mitigate negative effects and improve user experiance inkBOOK is using separate screen setting prest, that is temporary disabling full refresh setting defined by user (in device Settings).
+Each time high contrast night mode (white text on black background) is used in reading app, night mode should also be activated and disabled acordingly in inkBOOK SDK. It is also higly recomended to force full screen refresh after each page turn in dark mode.
 
 This could be done by using methods:
 
