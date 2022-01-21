@@ -5,7 +5,7 @@
 #### Powered by  [![N|Solid](../logo_inkBOOK.jpg)](https://www.inkbook.eu/)
 
 ## Preface
-Scrolling animations do not look good on E-ink devices, because of low screen refresh rate. For this reason We have created modified version of RecyclerView that can display long lists of items with the use of pagination instead of scrolling.
+Scrolling animations may not always look good on E-ink devices (depanding on scrollebale list items), due to low screen refresh rate. For this reason inkBOOK SDK provides modified version of RecyclerView, that could be used as alternative to scrolling and display long lists of items with the use of pagination instead of scrolling.
 
 
 
