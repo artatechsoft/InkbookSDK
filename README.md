@@ -11,14 +11,14 @@ This document gathers all information useful for adopting Android applications t
 ## User Interface simplifications
 ### Widget background 
 
-Dark backgrounds and colorful gradients should be avoided.  When graphic is scaled to 16-level grayscale this may lead to unreadable text sections or even in most drastic scenarios to displaying back text on black background. It is highly recommended to follow guidelines form Recommended colour range section.
+Dark backgrounds and colorful gradients should be avoided.  When graphic is scaled to 16-level grayscale this may lead to unreadable text sections or even in most drastic scenarios to displaying black text on black background. It is highly recommended to follow guidelines form Recommended colour range section.
 ### Animation effects
 All pageturn and other animation effects should be removed. Rich animated interface will not be displayed properly in E Ink environment. This may lead to unpleasant screen flickering, random erratic screen refreshments or at least odd behaviour of interface components.
 ### Item lists - scrolling vs pagination
 inkBOOK Android system is customised for E Ink and can handle scroll events animation effects. However using scrolled lists in interface and especially scrolled content in activity windows is not recommended. In order to display scroll animation properly screen needs to change display mode form 16-level grayscale to black and white only or 4-level grayscale and then go back to 16-level grayscale again when animation ends. Interfaces and content with reduced grayscale does not look well, looses all of details and changing screen mode requires full screen refresh each time, which results in unpleasant screen flickering. 
 It is highly recommended to use list pagination instead of scrolling as often as possible.
 
-We have made avaiable custom paging recycler view, that can be used to replace Android RecyclerView.
+We have made available custom paging recycler view, that can be used to replace Android RecyclerView.
 The view and information of how to use it can be found:
 
 https://github.com/artatechsoft/InkbookSDK/tree/master/inkbook-pagingrecyclerview
@@ -99,7 +99,7 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 ### How to properly refresh screen
 Major diffrence between e-paper and other types of displays is managing refresh. E-Ink screen does not automaticaly refresh. It is refreshed by system only when it's context changes. 
-Aditionaly, screen may refresh itself using difrent modes/strategies that prioritise different parameters like speed, image quality, ghosting effects (discussed later on).
+Additionaly, screen may refresh itself using different modes/strategies that prioritise different parameters like speed, image quality, ghosting effects (discussed later on).
 
 #### Reading mode
 
@@ -156,7 +156,7 @@ To invoke full screen refresh simply force realoding currently used screen refre
 #### using dark mode (night mode)
 
 Extensive use of dark backgrounds may increase ghosting efects on the screen. In order to mitigate negative effects and improve user experiance inkBOOK is using separate screen setting prest, that is temporary disabling full refresh setting defined by user (in device Settings).
-Each time high contrast night mode (white text on black background) is used in reading app, night mode should also be activated and disabled acordingly in inkBOOK SDK. It is also higly recomended to force full screen refresh after each page turn in dark mode.
+Each time high contrast night mode (white text on black background) is used in reading app, night mode should also be activated and disabled acordingly in inkBOOK SDK. It is also highly recomended to force full screen refresh after each page turn in dark mode.
 
 This could be done by using methods:
 
