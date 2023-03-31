@@ -1,4 +1,1 @@
-include ':app', ':inkbooksdk', ':pagingrecyclerview', ':pagingrecyclerviewApp'
-
-
-project(':pagingrecyclerview').projectDir = new File(rootDir, '/inkbook-pagingrecyclerview')
+include ':app', ':inkbooksdk'

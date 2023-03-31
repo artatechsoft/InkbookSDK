@@ -238,3 +238,80 @@ public static int EPD_A2=2;
 # LIST OF COMPATIBLE DEVICES:
 1. inkBOOK Calypso plus 6"
 2. inkBOOK Focus 7,8"
+
+
+
+# inkBOOK PagingRecyclerView adaptation guide
+
+
+
+#### Powered by  [![N|Solid](../logo_inkBOOK.jpg)](https://www.inkbook.eu/)
+
+## Preface
+Scrolling animations may not always look good on E-ink devices (depanding on scrollebale list items), due to low screen refresh rate. For this reason inkBOOK SDK provides modified version of RecyclerView, that could be used as alternative to scrolling and display long lists of items with the use of pagination instead of scrolling.
+
+
+In order to use the library you just have to copy the .aar file from:
+
+https://github.com/artatechsoft/InkbookSDK/tree/master/inkbooksdk
+
+To your application library folder. Then you can add the view to your layout like this:
+```xml
+   <com.artatech.android.shared.customview.inkbookpaging.InkBookPagingRecyclerView
+        android:id="@+id/list_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+```
+
+Example implementation
+'''
+binding.recyclerView.initLayout<String>(
+    object : InkRecyclerView.InkRecyclerViewInterface<String> {
+    override fun createListViewHolder(
+        viewGroup: ViewGroup?,
+        viewType: Int
+    ): InkAbstractViewHolder<String> {
+        TitleListItemViewHolder(
+            ItemListBinding.inflate(
+            LayoutInflater.from(context), viewGroup, false
+            )
+    )
+}
+
+override fun createGridViewHolder(
+    viewGroup: ViewGroup?,
+    viewType: Int
+): InkAbstractViewHolder<String> {
+        TitleGridItemViewHolder(
+            ItemGridBinding.inflate(
+                LayoutInflater.from(context), viewGroup, false
+            )
+        )
+    }
+}, ::filterList, InkRecyclerView.Mode.LIST
+)
+
+
+fun updateData(list: List<String>) {
+    binding.recyclerView.setData(list)
+}
+
+private fun filterList(query: String, item: String): Boolean {
+    return item.contains(query)
+}
+
+class TitleListItemViewHolder(binding: ItemListBinding) :
+InkAbstractViewHolder<String>(binding.root) {
+    override fun bind(item: String?) {
+        binding.title.text = item
+    }
+}
+
+class TitleGridItemViewHolder(binding: ItemGridBinding) :
+InkAbstractViewHolder<String>(binding.root) {
+    override fun bind(item: String?) {
+        binding.title.text = item
+    }
+}
+'''
+
