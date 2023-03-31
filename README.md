@@ -263,55 +263,55 @@ To your application library folder. Then you can add the view to your layout lik
         android:layout_height="match_parent"/>
 ```
 
-Example implementation
-'''
-binding.recyclerView.initLayout<String>(
-    object : InkRecyclerView.InkRecyclerViewInterface<String> {
-    override fun createListViewHolder(
+Example implementation:
+```kotlin
+    binding.recyclerView.initLayout<String>(
+        object : InkRecyclerView.InkRecyclerViewInterface<String> {
+        override fun createListViewHolder(
+            viewGroup: ViewGroup?,
+            viewType: Int
+        ): InkAbstractViewHolder<String> {
+            TitleListItemViewHolder(
+                ItemListBinding.inflate(
+                LayoutInflater.from(context), viewGroup, false
+                )
+        )
+    }
+
+    override fun createGridViewHolder(
         viewGroup: ViewGroup?,
         viewType: Int
     ): InkAbstractViewHolder<String> {
-        TitleListItemViewHolder(
-            ItemListBinding.inflate(
-            LayoutInflater.from(context), viewGroup, false
-            )
-    )
-}
-
-override fun createGridViewHolder(
-    viewGroup: ViewGroup?,
-    viewType: Int
-): InkAbstractViewHolder<String> {
         TitleGridItemViewHolder(
             ItemGridBinding.inflate(
                 LayoutInflater.from(context), viewGroup, false
-            )
-        )
+                    )
+                )
+            }
+        }, ::filterList, InkRecyclerView.Mode.LIST
+    )
+
+
+    fun updateData(list: List<String>) {
+        binding.recyclerView.setData(list)
     }
-}, ::filterList, InkRecyclerView.Mode.LIST
-)
 
-
-fun updateData(list: List<String>) {
-    binding.recyclerView.setData(list)
-}
-
-private fun filterList(query: String, item: String): Boolean {
-    return item.contains(query)
-}
-
-class TitleListItemViewHolder(binding: ItemListBinding) :
-InkAbstractViewHolder<String>(binding.root) {
-    override fun bind(item: String?) {
-        binding.title.text = item
+    private fun filterList(query: String, item: String): Boolean {
+        return item.contains(query)
     }
-}
 
-class TitleGridItemViewHolder(binding: ItemGridBinding) :
-InkAbstractViewHolder<String>(binding.root) {
-    override fun bind(item: String?) {
-        binding.title.text = item
+    class TitleListItemViewHolder(binding: ItemListBinding) :
+        InkAbstractViewHolder<String>(binding.root) {
+        override fun bind(item: String?) {
+            binding.title.text = item
+        }
     }
-}
-'''
+
+    class TitleGridItemViewHolder(binding: ItemGridBinding) :
+        InkAbstractViewHolder<String>(binding.root) {
+        override fun bind(item: String?) {
+            binding.title.text = item
+        }
+    }
+```
 
